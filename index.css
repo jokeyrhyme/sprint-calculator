@@ -1,0 +1,12 @@
+@import url(node_modules/normalize.css/normalize.css);
+
+@import url(containers/app/index.css);
+@import url(containers/root/index.css);
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+html, body {
+  box-sizing: border-box;
+}

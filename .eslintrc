@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint:recommended", "standard-react", "semistandard"],
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
