@@ -3,6 +3,8 @@
 @import url(containers/app/index.css);
 @import url(containers/root/index.css);
 
+@import url(components/RawData/index.css);
+
 *, *::after, *::before {
   box-sizing: inherit;
 }
