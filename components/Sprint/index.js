@@ -4,15 +4,12 @@
 
 import React, { Component, PropTypes } from 'react';
 
-// this module
+// local modules
 
-function dateToString (value) {
-  let date;
-  if (typeof value === 'number') {
-    date = new Date(value);
-  }
-  return date.toISOString().split('T')[0];
-}
+import DateInput from '../DateInput';
+import NumberInput from '../NumberInput';
+
+// this module
 
 class Sprint extends Component {
   constructor (props) {
@@ -21,24 +18,30 @@ class Sprint extends Component {
 
   render () {
     let {
-      endDate, startDate
+      endDate
     } = this.props.sprint;
     const {
+      startDate,
       absences, team,
       averageHoursPerPoint, personHoursPerWeek, sprint, weeksPerSprint
     } = this.props.sprint;
     const { available, maximum } = this.props.sprint.teamHoursPerSprint;
-    const { commitment, recommended } = this.props.sprint.points;
-    startDate = dateToString(startDate);
-    endDate = dateToString(endDate);
+    const { completed, recommended } = this.props.sprint.points;
+    endDate = endDate.toISOString().split('T')[0];
     return (
       <div className='Sprint'>
-        <h1>#{sprint}</h1>
-        <time>{startDate}</time> &rarr; <time>{endDate}</time>
+        <h1>#<NumberInput value={sprint} /></h1>
+        <DateInput value={startDate} /> &rarr; <time>{endDate}</time>
         <dl>
-          <dt>length</dt><dd>{weeksPerSprint} week(s)</dd>
-          <dt>team size</dt><dd>{team.length}</dd>
-          <dt>work week</dt><dd>{personHoursPerWeek} hours</dd>
+          <dt>length</dt>
+          <dd><NumberInput value={weeksPerSprint} /> week(s)</dd>
+
+          <dt>team size</dt>
+          <dd><NumberInput value={team.length} /></dd>
+
+          <dt>work week</dt>
+          <dd><NumberInput value={personHoursPerWeek} /> hours</dd>
+
           <dt>capacity</dt>
           <dd>
             <dl>
@@ -46,16 +49,23 @@ class Sprint extends Component {
               <dt>available</dt><dd>{available}</dd>
             </dl>
           </dd>
-          <dt>absences</dt><dd>{absences.length}</dd>
+
+          <dt>absences</dt>
+          <dd>{absences.length}</dd>
+
           <dt>points</dt>
           <dd>
             <dl>
-              <dt>recommended</dt><dd>{recommended}</dd>
-              <dt>commitment</dt><dd>{commitment}</dd>
+              <dt>recommended</dt>
+              <dd>{recommended}</dd>
+
+              <dt>completed</dt>
+              <dd><NumberInput value={completed} /></dd>
             </dl>
           </dd>
-          <dt>average hours per point </dt><dd>{averageHoursPerPoint}</dd>
-          <dt></dt><dd></dd>
+
+          <dt>average hours per point </dt>
+          <dd>{averageHoursPerPoint}</dd>
         </dl>
       </div>
     );
@@ -65,8 +75,8 @@ class Sprint extends Component {
 Sprint.propTypes = {
   sprint: PropTypes.shape({
     sprint: PropTypes.number,
-    startDate: PropTypes.number,
-    endDate: PropTypes.number,
+    startDate: PropTypes.instanceOf(Date),
+    endDate: PropTypes.instanceOf(Date),
     weeksPerSprint: PropTypes.number,
     team: PropTypes.arrayOf(PropTypes.string),
     personHoursPerWeek: PropTypes.number,
@@ -81,7 +91,7 @@ Sprint.propTypes = {
       })
     ),
     points: PropTypes.shape({
-      commitment: PropTypes.number,
+      completed: PropTypes.number,
       recommended: PropTypes.number
     }),
     averageHoursPerPoint: PropTypes.number
