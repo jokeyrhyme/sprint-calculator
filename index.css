@@ -4,6 +4,8 @@
 @import url(containers/root/index.css);
 
 @import url(components/RawData/index.css);
+@import url(components/Sprint/index.css);
+@import url(components/Sprints/index.css);
 
 *, *::after, *::before {
   box-sizing: inherit;

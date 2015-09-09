@@ -9,6 +9,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { importData } from '../../lib/actions';
 import RawData from '../../components/RawData';
+import Sprints from '../../components/Sprints';
 
 // this module
 
@@ -27,6 +28,7 @@ class App extends Component {
     return (
       <main>
         <h1>{this.props.ui.text}</h1>
+        <Sprints sprints={this.props.sprints} />
         <RawData data={this.props.ui.rawData} onImportClick={this.handleImportClick} />
       </main>
     );
