@@ -18,14 +18,14 @@ class RawData extends Component {
   }
 
   render () {
-    let textareaProps = {
+    const textareaProps = {
       className: 'RawData__Data',
       defaultValue: this.props.data,
       ref: 'data',
       spellCheck: false,
       onChange: this.handleTextChange.bind(this)
     };
-    let buttonProps = {
+    const buttonProps = {
       className: 'RawData__Import',
       onClick: () => {
         this.props.onImportClick(this.state.value);

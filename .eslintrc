@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "standard-react", "semistandard"],
+  "extends": ["standard-react", "@jokeyrhyme/es2015"],
   "env": {
     "browser": true,
     "node": true

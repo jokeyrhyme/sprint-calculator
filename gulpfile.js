@@ -1,3 +1,4 @@
+/* eslint-disable no-var, prefer-arrow-callback */ // no ES2015 here ?
 'use strict';
 
 // foreign modules

@@ -21,12 +21,14 @@ class Sprint extends Component {
 
   render () {
     let {
-      endDate, startDate,
+      endDate, startDate
+    } = this.props.sprint;
+    const {
       absences, team,
       averageHoursPerPoint, personHoursPerWeek, sprint, weeksPerSprint
     } = this.props.sprint;
-    let { available, maximum } = this.props.sprint.teamHoursPerSprint;
-    let { commitment, recommended } = this.props.sprint.points;
+    const { available, maximum } = this.props.sprint.teamHoursPerSprint;
+    const { commitment, recommended } = this.props.sprint.points;
     startDate = dateToString(startDate);
     endDate = dateToString(endDate);
     return (

@@ -48,6 +48,8 @@ App.defaultProps = {};
 /**
 provide a state suitable for use here
 @private
+@param {Map} state - current
+@returns {Object} exported from Immutable Map
 */
 function mapStateToProps (state) {
   return state.toJS();

@@ -1,8 +1,9 @@
 'use strict';
 
 /**
-@param {Object} reducers
-@returns {Function}
+@param {Object} keyedReducers - mapping of top-level properties to sub-reducers
+@param {Function[]} reducers - reducers that are provided the complete state
+@returns {Function} - new reducer that combines all provided reducers
 */
 export default function (keyedReducers = {}, ...reducers) {
   return function (state = new Map(), action) {
@@ -10,7 +11,7 @@ export default function (keyedReducers = {}, ...reducers) {
 
     // run reducers that are specific to top-level keys
     result = Object.keys(keyedReducers).reduce((prev, key) => {
-      let reducer = keyedReducers[key];
+      const reducer = keyedReducers[key];
       return prev.set(key, reducer(prev.get(key), action));
     }, result);
 
