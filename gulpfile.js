@@ -36,14 +36,16 @@ gulp.task('serve', ['default'], function () {
     './index.css',
     './components/**/*.css',
     './containers/**/*.css'
-  ], ['build:css']);
+  ], ['build:css'])
+  .on('error', gutil.log);
   gulp.watch([
     './index.js',
     './components/**/*.js',
     './containers/**/*.js',
     './lib/**/*.js',
     './utils/**/*.js'
-  ], ['build:js']);
+  ], ['build:js'])
+  .on('error', gutil.log);
   gulp.watch('./index.html').on('change', browserSync.reload);
   gulp.watch('./dist/**/*.js').on('change', browserSync.reload);
 });
