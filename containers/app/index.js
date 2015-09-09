@@ -27,7 +27,6 @@ class App extends Component {
   render () {
     return (
       <main>
-        <h1>{this.props.ui.text}</h1>
         <Sprints sprints={this.props.sprints} />
         <RawData data={this.props.ui.rawData} onImportClick={this.handleImportClick} />
       </main>
@@ -39,8 +38,7 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   sprints: PropTypes.arrayOf(PropTypes.object),
   ui: PropTypes.shape({
-    rawData: PropTypes.string,
-    text: PropTypes.string
+    rawData: PropTypes.string
   })
 };
 App.defaultProps = {};

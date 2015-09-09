@@ -12,13 +12,10 @@ import React, { Component } from 'react';
 import App from '../app';
 import { default as configureStore } from '../../lib/configureStore';
 import initialState from '../../lib/initialState';
-import { setText } from '../../lib/actions';
 
 // this module
 
 const store = configureStore(initialState);
-
-store.dispatch(setText('Hello, world!'));
 
 export default class Root extends Component {
   render () {
