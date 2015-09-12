@@ -13,16 +13,31 @@ import { toDateString } from '../../utils/helpers';
 class DateInput extends Component {
   constructor (props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange (event) {
+    if (this.props.onChange) {
+      this.props.onChange(React.findDOMNode(this.refs.input).valueAsDate);
+    }
   }
 
   render () {
+    const props = {
+      ref: 'input',
+      onChange: this.handleChange,
+      type: 'date',
+      value: toDateString(this.props.value)
+    };
     return (
-      <input type='date' value={toDateString(this.props.value)} />
+      <input {...props} />
     );
   }
 }
 
 DateInput.propTypes = {
+  onChange: PropTypes.func,
   value: PropTypes.instanceOf(Date).isRequired
 };
 DateInput.defaultProps = {

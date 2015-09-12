@@ -9,7 +9,7 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   importData,
-  setSprintID, setSprintWeeks
+  setSprintID, setSprintStartDate, setSprintWeeks
 } from '../../lib/actions';
 import RawData from '../../components/RawData';
 import Sprints from '../../components/Sprints';
@@ -18,6 +18,7 @@ import Sprints from '../../components/Sprints';
 
 const PROPS_ACTIONS = {
   id: setSprintID,
+  startDate: setSprintStartDate,
   weeksPerSprint: setSprintWeeks
 };
 

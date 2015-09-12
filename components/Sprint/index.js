@@ -16,11 +16,16 @@ class Sprint extends Component {
     super(props);
 
     this.handleIDChange = this.handleIDChange.bind(this);
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleWeeksChange = this.handleWeeksChange.bind(this);
   }
 
   handleIDChange (id) {
     this.props.onChange(['id'], id);
+  }
+
+  handleStartDateChange (date) {
+    this.props.onChange(['startDate'], date);
   }
 
   handleWeeksChange (weeks) {
@@ -43,7 +48,7 @@ class Sprint extends Component {
     return (
       <div className='Sprint'>
         <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
-        <DateInput value={startDate} /> &rarr; <time>{endDate}</time>
+        <DateInput value={startDate} onChange={this.handleStartDateChange} /> &rarr; <time>{endDate}</time>
         <dl>
           <dt>length</dt>
           <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
