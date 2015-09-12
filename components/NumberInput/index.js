@@ -9,16 +9,31 @@ import React, { Component, PropTypes } from 'react';
 class NumberInput extends Component {
   constructor (props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange (event) {
+    if (this.props.onChange) {
+      this.props.onChange(React.findDOMNode(this.refs.input).valueAsNumber);
+    }
   }
 
   render () {
+    const props = {
+      ref: 'input',
+      onChange: this.handleChange,
+      type: 'number',
+      value: this.props.value
+    };
     return (
-      <input type='number' value={this.props.value} />
+      <input {...props} />
     );
   }
 }
 
 NumberInput.propTypes = {
+  onChange: PropTypes.func,
   value: PropTypes.number.isRequired
 };
 NumberInput.defaultProps = {

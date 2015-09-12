@@ -14,6 +14,12 @@ import NumberInput from '../NumberInput';
 class Sprint extends Component {
   constructor (props) {
     super(props);
+
+    this.handleIDChange = this.handleIDChange.bind(this);
+  }
+
+  handleIDChange (id) {
+    this.props.onChange(['id'], id);
   }
 
   render () {
@@ -23,14 +29,14 @@ class Sprint extends Component {
     const {
       startDate,
       absences, team,
-      averageHoursPerPoint, personHoursPerWeek, sprint, weeksPerSprint
+      averageHoursPerPoint, personHoursPerWeek, id, weeksPerSprint
     } = this.props.sprint;
     const { available, maximum } = this.props.sprint.teamHoursPerSprint;
     const { completed, recommended } = this.props.sprint.points;
     endDate = endDate.toISOString().split('T')[0];
     return (
       <div className='Sprint'>
-        <h1>#<NumberInput value={sprint} /></h1>
+        <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
         <DateInput value={startDate} /> &rarr; <time>{endDate}</time>
         <dl>
           <dt>length</dt>
@@ -73,8 +79,9 @@ class Sprint extends Component {
 }
 
 Sprint.propTypes = {
+  onChange: PropTypes.func.isRequired,
   sprint: PropTypes.shape({
-    sprint: PropTypes.number,
+    id: PropTypes.number,
     startDate: PropTypes.instanceOf(Date),
     endDate: PropTypes.instanceOf(Date),
     weeksPerSprint: PropTypes.number,

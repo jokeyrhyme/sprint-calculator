@@ -16,13 +16,16 @@ class Sprints extends Component {
   }
 
   render () {
+    const handleSprintChange = this.props.onSprintChange;
     return (
       <div>
         <ul>
           { this.props.sprints.map((sprint, index) => {
             return (
               <li key={index}>
-                <Sprint sprint={sprint} />
+                <Sprint sprint={sprint} onChange={(path, value) => {
+                  handleSprintChange([index].concat(path), value);
+                }} />
               </li>
             );
           }) }
@@ -34,6 +37,7 @@ class Sprints extends Component {
 }
 
 Sprints.propTypes = {
+  onSprintChange: PropTypes.func.isRequired,
   sprints: PropTypes.array
 };
 Sprints.defaultProps = {
