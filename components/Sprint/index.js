@@ -17,6 +17,7 @@ class Sprint extends Component {
 
     this.handleIDChange = this.handleIDChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
+    this.handleWeekHoursChange = this.handleWeekHoursChange.bind(this);
     this.handleWeeksChange = this.handleWeeksChange.bind(this);
   }
 
@@ -26,6 +27,10 @@ class Sprint extends Component {
 
   handleStartDateChange (date) {
     this.props.onChange(['startDate'], date);
+  }
+
+  handleWeekHoursChange (hours) {
+    this.props.onChange(['personHoursPerWeek'], hours);
   }
 
   handleWeeksChange (weeks) {
@@ -57,7 +62,7 @@ class Sprint extends Component {
           <dd><NumberInput value={team.length} /></dd>
 
           <dt>work week</dt>
-          <dd><NumberInput value={personHoursPerWeek} /> hours</dd>
+          <dd><NumberInput value={personHoursPerWeek} onChange={this.handleWeekHoursChange} /> hours</dd>
 
           <dt>capacity</dt>
           <dd>
