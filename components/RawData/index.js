@@ -20,10 +20,10 @@ class RawData extends Component {
   render () {
     const textareaProps = {
       className: 'RawData__Data',
-      defaultValue: this.props.data,
+      onChange: this.handleTextChange.bind(this),
       ref: 'data',
       spellCheck: false,
-      onChange: this.handleTextChange.bind(this)
+      value: this.state.value
     };
     const buttonProps = {
       className: 'RawData__Import',
@@ -39,14 +39,8 @@ class RawData extends Component {
     );
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    if (nextProps.data !== this.props.data) {
-      return true;
-    }
-    if (nextProps.data !== this.state.value) {
-      return true;
-    }
-    return false; // ignore state changes
+  componentWillReceiveProps ({ data }) {
+    this.setState({ value: data });
   }
 }
 
