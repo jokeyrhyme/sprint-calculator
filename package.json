@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "lint": "eslint .",
+    "lint": "eslint --fix --cache .",
     "test": "karma start --browsers PhantomJS",
     "posttest": "npm run lint",
-    "test-full": "eslint . && karma start"
+    "test:full": "karma start",
+    "posttest:full": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
     "browser-sync": "^2.9",
     "browserify": "^11.0",
     "cssnano": "^3.0",
-    "eslint": "^1.1",
+    "eslint": "^1.4",
     "eslint-config-semistandard": "^5.0",
     "eslint-config-standard": "^4.3",
     "eslint-config-standard-react": "^1.0",
