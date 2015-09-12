@@ -7,14 +7,18 @@ import React, { Component, PropTypes } from 'react';
 
 // local modules
 
-import { importData, setSprintID } from '../../lib/actions';
+import {
+  importData,
+  setSprintID, setSprintWeeks
+} from '../../lib/actions';
 import RawData from '../../components/RawData';
 import Sprints from '../../components/Sprints';
 
 // this module
 
 const PROPS_ACTIONS = {
-  id: setSprintID
+  id: setSprintID,
+  weeksPerSprint: setSprintWeeks
 };
 
 class App extends Component {

@@ -16,10 +16,15 @@ class Sprint extends Component {
     super(props);
 
     this.handleIDChange = this.handleIDChange.bind(this);
+    this.handleWeeksChange = this.handleWeeksChange.bind(this);
   }
 
   handleIDChange (id) {
     this.props.onChange(['id'], id);
+  }
+
+  handleWeeksChange (weeks) {
+    this.props.onChange(['weeksPerSprint'], weeks);
   }
 
   render () {
@@ -34,13 +39,14 @@ class Sprint extends Component {
     const { available, maximum } = this.props.sprint.teamHoursPerSprint;
     const { completed, recommended } = this.props.sprint.points;
     endDate = endDate.toISOString().split('T')[0];
+
     return (
       <div className='Sprint'>
         <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
         <DateInput value={startDate} /> &rarr; <time>{endDate}</time>
         <dl>
           <dt>length</dt>
-          <dd><NumberInput value={weeksPerSprint} /> week(s)</dd>
+          <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
 
           <dt>team size</dt>
           <dd><NumberInput value={team.length} /></dd>
