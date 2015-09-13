@@ -1,13 +1,13 @@
 @import url(node_modules/normalize.css/normalize.css);
 
-@import url(containers/app/index.css);
-@import url(containers/root/index.css);
+/*@import url(containers/app/index.css);*/
+/*@import url(containers/root/index.css);*/
 
-@import url(components/DateInput/index.css);
-@import url(components/NumberInput/index.css);
+/*@import url(components/DateInput/index.css);*/
+/*@import url(components/NumberInput/index.css);*/
 @import url(components/RawData/index.css);
-@import url(components/Sprint/index.css);
-@import url(components/Sprints/index.css);
+/*@import url(components/Sprint/index.css);*/
+/*@import url(components/Sprints/index.css);*/
 
 *, *::after, *::before {
   box-sizing: inherit;
@@ -15,4 +15,9 @@
 
 html, body {
   box-sizing: border-box;
+}
+
+button {
+  min-height: 44px;
+  min-width: 44px;
 }
