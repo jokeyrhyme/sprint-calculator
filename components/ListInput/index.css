@@ -1,0 +1,9 @@
+.ListInput {}
+
+.ListInput__Entry {
+  margin: .25em;
+}
+
+.ListInput__Remove {
+  margin: .25em;
+}

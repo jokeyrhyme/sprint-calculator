@@ -9,7 +9,8 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   importData,
-  setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks
+  setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks,
+  removeSprintAbsence, removeSprintMember
 } from '../../lib/actions';
 import RawData from '../../components/RawData';
 import Sprints from '../../components/Sprints';
@@ -39,6 +40,14 @@ class App extends Component {
     const action = PROPS_ACTIONS[prop];
     if (action) {
       this.props.dispatch(action(index, ...values));
+      return;
+    }
+    if (prop === 'absences') {
+      this.props.dispatch(removeSprintAbsence(index, ...values));
+      return;
+    }
+    if (prop === 'team') {
+      this.props.dispatch(removeSprintMember(index, ...values));
       return;
     }
     global.console.log(new Error(`"${prop}" has no mapped action`));

@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 // local modules
 
 import DateInput from '../DateInput';
+import ListInput from '../ListInput';
 import NumberInput from '../NumberInput';
 
 // this module
@@ -19,6 +20,9 @@ class Sprint extends Component {
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleWeekHoursChange = this.handleWeekHoursChange.bind(this);
     this.handleWeeksChange = this.handleWeeksChange.bind(this);
+
+    this.handleAbsenceRemove = this.handleAbsenceRemove.bind(this);
+    this.handleMemberRemove = this.handleMemberRemove.bind(this);
   }
 
   handleIDChange (id) {
@@ -35,6 +39,16 @@ class Sprint extends Component {
 
   handleWeeksChange (weeks) {
     this.props.onChange(['weeksPerSprint'], weeks);
+  }
+
+  handleAbsenceRemove (index) {
+    const { reason, hours } = this.props.sprint.absences[index];
+    this.props.onChange(['absences'], reason, hours);
+  }
+
+  handleMemberRemove (index) {
+    const name = this.props.sprint.team[index];
+    this.props.onChange(['team'], name);
   }
 
   render () {
@@ -59,7 +73,7 @@ class Sprint extends Component {
           <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
 
           <dt>team size</dt>
-          <dd><NumberInput value={team.length} /></dd>
+          <dd><ListInput values={team} onRemove={this.handleMemberRemove} /></dd>
 
           <dt>work week</dt>
           <dd><NumberInput value={personHoursPerWeek} onChange={this.handleWeekHoursChange} /> hours</dd>
@@ -73,7 +87,7 @@ class Sprint extends Component {
           </dd>
 
           <dt>absences</dt>
-          <dd>{absences.length}</dd>
+          <dd><ListInput values={absences} onRemove={this.handleAbsenceRemove} /></dd>
 
           <dt>points</dt>
           <dd>
