@@ -47,8 +47,7 @@ class Sprint extends Component {
   }
 
   handleMemberRemove (index) {
-    const name = this.props.sprint.team[index];
-    this.props.onChange(['team'], name);
+    this.props.onChange(['team'], index);
   }
 
   render () {
