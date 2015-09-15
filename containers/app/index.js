@@ -9,20 +9,12 @@ import React, { Component, PropTypes } from 'react';
 
 import {
   importData,
-  setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks,
-  removeSprintAbsence, removeSprintMember
+  removeSprintAbsence
 } from '../../lib/actions';
 import RawData from '../../components/RawData';
 import Sprints from '../../components/Sprints';
 
 // this module
-
-const PROPS_ACTIONS = {
-  id: setSprintID,
-  personHoursPerWeek: setSprintWeekHours,
-  startDate: setSprintStartDate,
-  weeksPerSprint: setSprintWeeks
-};
 
 class App extends Component {
   constructor (props) {
@@ -37,26 +29,18 @@ class App extends Component {
   }
 
   handleSprintChange ([index, prop], ...values) {
-    const action = PROPS_ACTIONS[prop];
-    if (action) {
-      this.props.dispatch(action(index, ...values));
-      return;
-    }
     if (prop === 'absences') {
       this.props.dispatch(removeSprintAbsence(index, ...values));
-      return;
-    }
-    if (prop === 'team') {
-      this.props.dispatch(removeSprintMember(index, ...values));
       return;
     }
     global.console.log(new Error(`"${prop}" has no mapped action`));
   }
 
   render () {
+    const { dispatch, sprints } = this.props;
     return (
       <main>
-        <Sprints sprints={this.props.sprints} onSprintChange={this.handleSprintChange} />
+        <Sprints dispatch={dispatch} sprints={sprints} onSprintChange={this.handleSprintChange} />
         <RawData data={this.props.ui.rawData} onImportClick={this.handleImportClick} />
       </main>
     );

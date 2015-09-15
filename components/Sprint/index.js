@@ -9,6 +9,12 @@ import React, { Component, PropTypes } from 'react';
 import DateInput from '../DateInput';
 import ListInput from '../ListInput';
 import NumberInput from '../NumberInput';
+import TextInput from '../TextInput';
+
+import {
+  setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks,
+  addSprintMember, removeSprintMember, setSprintMember
+} from '../../lib/actions';
 
 // this module
 
@@ -22,23 +28,29 @@ class Sprint extends Component {
     this.handleWeeksChange = this.handleWeeksChange.bind(this);
 
     this.handleAbsenceRemove = this.handleAbsenceRemove.bind(this);
+    this.handleMemberAdd = this.handleMemberAdd.bind(this);
+    this.handleMemberChange = this.handleMemberChange.bind(this);
     this.handleMemberRemove = this.handleMemberRemove.bind(this);
   }
 
   handleIDChange (id) {
-    this.props.onChange(['id'], id);
+    const { dispatch, index } = this.props;
+    dispatch(setSprintID(index, id));
   }
 
   handleStartDateChange (date) {
-    this.props.onChange(['startDate'], date);
+    const { dispatch, index } = this.props;
+    dispatch(setSprintStartDate(index, date));
   }
 
   handleWeekHoursChange (hours) {
-    this.props.onChange(['personHoursPerWeek'], hours);
+    const { dispatch, index } = this.props;
+    dispatch(setSprintWeekHours(index, hours));
   }
 
   handleWeeksChange (weeks) {
-    this.props.onChange(['weeksPerSprint'], weeks);
+    const { dispatch, index } = this.props;
+    dispatch(setSprintWeeks(index, weeks));
   }
 
   handleAbsenceRemove (index) {
@@ -46,8 +58,17 @@ class Sprint extends Component {
     this.props.onChange(['absences'], reason, hours);
   }
 
-  handleMemberRemove (index) {
-    this.props.onChange(['team'], index);
+  handleMemberAdd (name) {
+    const { dispatch, index } = this.props;
+    dispatch(addSprintMember(index, name));
+  }
+  handleMemberChange (memberIndex, name) {
+    const { dispatch, index } = this.props;
+    dispatch(setSprintMember(index, memberIndex, name));
+  }
+  handleMemberRemove (memberIndex) {
+    const { dispatch, index } = this.props;
+    dispatch(removeSprintMember(index, memberIndex));
   }
 
   render () {
@@ -63,6 +84,14 @@ class Sprint extends Component {
     const { completed, recommended } = this.props.sprint.points;
     endDate = endDate.toISOString().split('T')[0];
 
+    const teamProps = {
+      EntryInput: TextInput,
+      onAdd: this.handleMemberAdd,
+      onChange: this.handleMemberChange,
+      onRemove: this.handleMemberRemove,
+      values: team
+    };
+
     return (
       <div className='Sprint'>
         <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
@@ -72,7 +101,7 @@ class Sprint extends Component {
           <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
 
           <dt>team size</dt>
-          <dd><ListInput values={team} onRemove={this.handleMemberRemove} /></dd>
+          <dd><ListInput {...teamProps} /></dd>
 
           <dt>work week</dt>
           <dd><NumberInput value={personHoursPerWeek} onChange={this.handleWeekHoursChange} /> hours</dd>
@@ -108,6 +137,8 @@ class Sprint extends Component {
 }
 
 Sprint.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   sprint: PropTypes.shape({
     id: PropTypes.number,
