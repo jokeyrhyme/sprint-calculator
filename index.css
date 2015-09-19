@@ -9,8 +9,8 @@
 /*@import url(components/NumberInput/index.css);*/
 /*@import url(components/TextInput/index.css);*/
 @import url(components/RawData/index.css);
-/*@import url(components/Sprint/index.css);*/
-/*@import url(components/Sprints/index.css);*/
+@import url(components/Sprint/index.css);
+@import url(components/Sprints/index.css);
 
 *, *::after, *::before {
   box-sizing: inherit;

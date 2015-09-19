@@ -1,4 +1,8 @@
-.ListInput {}
+.ListInput {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 .ListInput__Entry {
   margin: .3em;

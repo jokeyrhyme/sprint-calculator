@@ -20,7 +20,7 @@ class Sprints extends Component {
     const { dispatch } = this.props;
     return (
       <div>
-        <ul>
+        <ul className='Sprints'>
           { this.props.sprints.map((sprint, index) => {
             return (
               <li key={index}>
