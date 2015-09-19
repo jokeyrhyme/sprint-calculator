@@ -3,6 +3,7 @@
 /*@import url(containers/app/index.css);*/
 /*@import url(containers/root/index.css);*/
 
+@import url(components/AbsenceInput/index.css);
 /*@import url(components/DateInput/index.css);*/
 /*@import url(components/List/index.css);*/
 @import url(components/ListInput/index.css);

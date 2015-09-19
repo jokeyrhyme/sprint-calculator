@@ -6,6 +6,7 @@ import React, { Component, PropTypes } from 'react';
 
 // local modules
 
+import AbsenceInput from '../AbsenceInput';
 import DateInput from '../DateInput';
 import ListInput from '../ListInput';
 import NumberInput from '../NumberInput';
@@ -13,6 +14,7 @@ import TextInput from '../TextInput';
 
 import {
   setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks,
+  addSprintAbsence, removeSprintAbsence, setSprintAbsence,
   addSprintMember, removeSprintMember, setSprintMember
 } from '../../lib/actions';
 
@@ -27,7 +29,10 @@ class Sprint extends Component {
     this.handleWeekHoursChange = this.handleWeekHoursChange.bind(this);
     this.handleWeeksChange = this.handleWeeksChange.bind(this);
 
+    this.handleAbsenceAdd = this.handleAbsenceAdd.bind(this);
+    this.handleAbsenceChange = this.handleAbsenceChange.bind(this);
     this.handleAbsenceRemove = this.handleAbsenceRemove.bind(this);
+
     this.handleMemberAdd = this.handleMemberAdd.bind(this);
     this.handleMemberChange = this.handleMemberChange.bind(this);
     this.handleMemberRemove = this.handleMemberRemove.bind(this);
@@ -53,9 +58,17 @@ class Sprint extends Component {
     dispatch(setSprintWeeks(index, weeks));
   }
 
-  handleAbsenceRemove (index) {
-    const { reason, hours } = this.props.sprint.absences[index];
-    this.props.onChange(['absences'], reason, hours);
+  handleAbsenceAdd ({ reason, hours }) {
+    const { dispatch, index } = this.props;
+    dispatch(addSprintAbsence(index, reason, hours));
+  }
+  handleAbsenceChange (absenceIndex, { reason, hours }) {
+    const { dispatch, index } = this.props;
+    dispatch(setSprintAbsence(index, absenceIndex, reason, hours));
+  }
+  handleAbsenceRemove (absenceIndex) {
+    const { dispatch, index } = this.props;
+    dispatch(removeSprintAbsence(index, absenceIndex));
   }
 
   handleMemberAdd (name) {
@@ -92,6 +105,14 @@ class Sprint extends Component {
       values: team
     };
 
+    const absencesProps = {
+      EntryInput: AbsenceInput,
+      onAdd: this.handleAbsenceAdd,
+      onChange: this.handleAbsenceChange,
+      onRemove: this.handleAbsenceRemove,
+      values: absences
+    };
+
     return (
       <div className='Sprint'>
         <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
@@ -115,7 +136,7 @@ class Sprint extends Component {
           </dd>
 
           <dt>absences</dt>
-          <dd><ListInput values={absences} onRemove={this.handleAbsenceRemove} /></dd>
+          <dd><ListInput {...absencesProps} /></dd>
 
           <dt>points</dt>
           <dd>
