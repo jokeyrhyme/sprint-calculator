@@ -34,6 +34,7 @@ class AbsenceInput extends Component {
       className: 'AbsenceInput__Hours',
       onChange: this.handleChange,
       ref: 'hours',
+      step: 0.1,
       type: 'number',
       value: hours
     };

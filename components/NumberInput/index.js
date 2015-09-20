@@ -20,11 +20,12 @@ class NumberInput extends Component {
   }
 
   render () {
-    const { className, value } = this.props;
+    const { className, step, value } = this.props;
     const props = {
       className,
       ref: 'input',
       onChange: this.handleChange,
+      step,
       type: 'number',
       value
     };
@@ -37,10 +38,12 @@ class NumberInput extends Component {
 NumberInput.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
+  step: PropTypes.number,
   value: PropTypes.number.isRequired
 };
 NumberInput.defaultProps = {
   className: '',
+  step: 1,
   value: 0
 };
 
