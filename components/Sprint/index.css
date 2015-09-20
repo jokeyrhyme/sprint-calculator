@@ -1,3 +1,50 @@
+.Fraction {
+  margin: .2em;
+}
+.Fraction__Solidus {
+  margin: 0 .2em;
+}
+
 .Sprint {
   margin: 1rem;
+}
+
+.Sprint__Header {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Sprint__IdInput {
+  width: 100%;
+}
+
+.Sprint__Dates,
+.Sprint__Id {
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin: 1em .5em .5em 0;
+}
+
+.Sprint__Id {
+  flex-basis: 5em;
+}
+
+.Sprint__Dates {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+}
+
+.Sprint__EndDate,
+.Sprint__StartDate {
+  flex-basis: 9em;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.Sprint__StartDateInput {
+  width: 100%;
 }

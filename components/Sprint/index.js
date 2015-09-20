@@ -114,18 +114,32 @@ class Sprint extends Component {
     };
 
     return (
-      <div className='Sprint'>
-        <h1>#<NumberInput value={id} onChange={this.handleIDChange} /></h1>
-        <DateInput value={startDate} onChange={this.handleStartDateChange} /> &rarr; <time>{endDate}</time>
+      <article className='Sprint'>
+        <header className='Sprint__Header'>
+          <h1 className='Sprint__Id'>
+            <NumberInput className='Sprint__IdInput' value={id} onChange={this.handleIDChange} />
+          </h1>
+          <div className='Sprint__Dates'>
+            <span className='Sprint__StartDate'>
+              <DateInput className='Sprint__StartDateInput' value={startDate} onChange={this.handleStartDateChange} />
+            </span>
+            <span className='Sprint__EndDate'>
+              &rarr; <time>{endDate}</time>
+            </span>
+          </div>
+        </header>
         <dl>
           <dt>length</dt>
           <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
 
-          <dt>team size</dt>
-          <dd><ListInput {...teamProps} /></dd>
-
           <dt>work week</dt>
           <dd><NumberInput value={personHoursPerWeek} onChange={this.handleWeekHoursChange} /> hours</dd>
+
+          <dt>team members</dt>
+          <dd><ListInput {...teamProps} /></dd>
+
+          <dt>absences</dt>
+          <dd><ListInput {...absencesProps} /></dd>
 
           <dt>capacity</dt>
           <dd>
@@ -134,9 +148,6 @@ class Sprint extends Component {
               <dt>available</dt><dd>{available}</dd>
             </dl>
           </dd>
-
-          <dt>absences</dt>
-          <dd><ListInput {...absencesProps} /></dd>
 
           <dt>points</dt>
           <dd>
@@ -152,7 +163,7 @@ class Sprint extends Component {
           <dt>average hours per point </dt>
           <dd>{averageHoursPerPoint}</dd>
         </dl>
-      </div>
+      </article>
     );
   }
 }

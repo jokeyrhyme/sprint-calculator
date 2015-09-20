@@ -24,11 +24,13 @@ class DateInput extends Component {
   }
 
   render () {
+    const { className, value } = this.props;
     const props = {
+      className,
       ref: 'input',
       onChange: this.handleChange,
       type: 'date',
-      value: toDateString(this.props.value)
+      value: toDateString(value)
     };
     return (
       <input {...props} />
@@ -37,10 +39,12 @@ class DateInput extends Component {
 }
 
 DateInput.propTypes = {
+  className: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.instanceOf(Date).isRequired
 };
 DateInput.defaultProps = {
+  className: '',
   value: new Date()
 };
 

@@ -26,7 +26,6 @@ class AbsenceInput extends Component {
     const reasonProps = {
       className: 'AbsenceInput__Reason',
       onChange: this.handleChange,
-      placeholder: 'dog ate my homework',
       ref: 'reason',
       type: 'text',
       value: reason
@@ -34,7 +33,6 @@ class AbsenceInput extends Component {
     const hoursProps = {
       className: 'AbsenceInput__Hours',
       onChange: this.handleChange,
-      placeholder: 0,
       ref: 'hours',
       type: 'number',
       value: hours
