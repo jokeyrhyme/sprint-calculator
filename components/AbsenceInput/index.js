@@ -11,6 +11,7 @@ class AbsenceInput extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange (event) {
@@ -21,11 +22,18 @@ class AbsenceInput extends Component {
     }
   }
 
+  handleKeyPress (event) {
+    if (event.key === 'Enter' && this.props.onEnterKey) {
+      this.props.onEnterKey();
+    }
+  }
+
   render () {
     const { reason, hours } = this.props.value || {};
     const reasonProps = {
       className: 'AbsenceInput__Reason',
       onChange: this.handleChange,
+      onKeyPress: this.handleKeyPress,
       ref: 'reason',
       type: 'text',
       value: reason
@@ -33,6 +41,7 @@ class AbsenceInput extends Component {
     const hoursProps = {
       className: 'AbsenceInput__Hours',
       onChange: this.handleChange,
+      onKeyPress: this.handleKeyPress,
       ref: 'hours',
       step: 0.1,
       type: 'number',
@@ -48,6 +57,7 @@ class AbsenceInput extends Component {
 }
 
 AbsenceInput.propTypes = {
+  onEnterKey: PropTypes.func,
   onChange: PropTypes.func,
   value: PropTypes.shape({
     reason: PropTypes.string,

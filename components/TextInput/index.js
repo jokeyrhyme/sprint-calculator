@@ -11,6 +11,7 @@ class TextInput extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleChange (event) {
@@ -19,10 +20,17 @@ class TextInput extends Component {
     }
   }
 
+  handleKeyPress (event) {
+    if (event.key === 'Enter' && this.props.onEnterKey) {
+      this.props.onEnterKey();
+    }
+  }
+
   render () {
     const props = {
       ref: 'input',
       onChange: this.handleChange,
+      onKeyPress: this.handleKeyPress,
       type: 'text',
       value: this.props.value
     };
@@ -33,6 +41,7 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
+  onEnterKey: PropTypes.func,
   onChange: PropTypes.func,
   value: PropTypes.string
 };

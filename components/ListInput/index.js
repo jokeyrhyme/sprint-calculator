@@ -15,6 +15,13 @@ class ListInput extends Component {
     super(props);
 
     this.state = {};
+
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleAdd () {
+    this.props.onAdd(this.state.newEntry);
+    this.setState({ newEntry: null });
   }
 
   render () {
@@ -54,14 +61,13 @@ class ListInput extends Component {
   renderAddEntry () {
     const props = {
       className: 'ListInput__Add',
-      onClick: () => {
-        this.props.onAdd(this.state.newEntry);
-        this.setState({ newEntry: null });
-      }
+      onClick: this.handleAdd
     };
     const EntryInput = this.props.EntryInput;
     const entryProps = {
+      ref: 'addentry',
       onChange: (value) => { this.setState({ newEntry: value }); },
+      onEnterKey: this.handleAdd,
       value: this.state.newEntry
     };
     return (
