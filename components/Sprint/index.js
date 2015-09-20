@@ -160,7 +160,6 @@ class Sprint extends Component {
 Sprint.propTypes = {
   dispatch: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
   sprint: PropTypes.shape({
     id: PropTypes.number,
     startDate: PropTypes.instanceOf(Date),

@@ -7,6 +7,7 @@ import React, { Component, PropTypes } from 'react';
 // local modules
 
 import Sprint from '../Sprint';
+import { createSprint } from '../../lib/actions';
 
 // this module
 
@@ -16,22 +17,25 @@ class Sprints extends Component {
   }
 
   render () {
-    const handleSprintChange = this.props.onSprintChange;
     const { dispatch } = this.props;
+    const newProps = {
+      onClick: () => {
+        this.props.dispatch(createSprint());
+      }
+    };
     return (
       <div>
+        <button {...newProps}>new sprint</button>
         <ul className='Sprints'>
-          { this.props.sprints.map((sprint, index) => {
+          { this.props.sprints.reverse().map((sprint, index) => {
+            const reverseIndex = this.props.sprints.length - index - 1;
             return (
-              <li key={index}>
-                <Sprint index={index} dispatch={dispatch} sprint={sprint} onChange={(path, value) => {
-                  handleSprintChange([index].concat(path), value);
-                }} />
+              <li key={reverseIndex}>
+                <Sprint index={reverseIndex} dispatch={dispatch} sprint={sprint} />
               </li>
             );
           }) }
         </ul>
-        <button>new</button>
       </div>
     );
   }
@@ -39,7 +43,6 @@ class Sprints extends Component {
 
 Sprints.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  onSprintChange: PropTypes.func.isRequired,
   sprints: PropTypes.array
 };
 Sprints.defaultProps = {

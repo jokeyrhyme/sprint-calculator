@@ -7,10 +7,7 @@ import React, { Component, PropTypes } from 'react';
 
 // local modules
 
-import {
-  importData,
-  removeSprintAbsence
-} from '../../lib/actions';
+import { importData } from '../../lib/actions';
 import RawData from '../../components/RawData';
 import Sprints from '../../components/Sprints';
 
@@ -21,26 +18,17 @@ class App extends Component {
     super(props);
 
     this.handleImportClick = this.handleImportClick.bind(this);
-    this.handleSprintChange = this.handleSprintChange.bind(this);
   }
 
   handleImportClick (value) {
     this.props.dispatch(importData(value));
   }
 
-  handleSprintChange ([index, prop], ...values) {
-    if (prop === 'absences') {
-      this.props.dispatch(removeSprintAbsence(index, ...values));
-      return;
-    }
-    global.console.log(new Error(`"${prop}" has no mapped action`));
-  }
-
   render () {
     const { dispatch, sprints } = this.props;
     return (
       <main>
-        <Sprints dispatch={dispatch} sprints={sprints} onSprintChange={this.handleSprintChange} />
+        <Sprints dispatch={dispatch} sprints={sprints} />
         <RawData data={this.props.ui.rawData} onImportClick={this.handleImportClick} />
       </main>
     );
