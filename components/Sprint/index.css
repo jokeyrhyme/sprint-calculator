@@ -48,3 +48,25 @@
 .Sprint__StartDateInput {
   width: 100%;
 }
+
+.Sprint__Calculations,
+.Sprint__Parameters,
+.Sprint__TeamData {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Sprint__Parameters {
+  justify-content: space-around;
+}
+
+.Sprint__ParameterLabel,
+.Sprint__ParameterInput {
+  display: block;
+}
+
+.Sprint__TeamData {
+  justify-content: flex-start;
+}

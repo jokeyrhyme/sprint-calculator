@@ -128,41 +128,60 @@ class Sprint extends Component {
             </span>
           </div>
         </header>
-        <dl>
-          <dt>length</dt>
-          <dd><NumberInput value={weeksPerSprint} onChange={this.handleWeeksChange} /> week(s)</dd>
 
-          <dt>work week</dt>
-          <dd><NumberInput value={personHoursPerWeek} onChange={this.handleWeekHoursChange} /> hours</dd>
+        <div className='Sprint__Parameters'>
+          <fieldset className='Sprint__Parameter'>
+            <label className='Sprint__ParameterLabel'>weeks per sprint</label>
+            <NumberInput className='Sprint__ParameterInput' value={weeksPerSprint} onChange={this.handleWeeksChange} />
+          </fieldset>
 
-          <dt>team members</dt>
-          <dd><ListInput {...teamProps} /></dd>
+          <fieldset className='Sprint__Parameter'>
+            <label className='Sprint__ParameterLabel'>work hours per person per week</label>
+            <NumberInput className='Sprint__ParameterInput' value={personHoursPerWeek} onChange={this.handleWeekHoursChange} />
+          </fieldset>
+        </div>
 
-          <dt>absences</dt>
-          <dd><ListInput {...absencesProps} /></dd>
+        <div className='Sprint__TeamData'>
+          <dl>
+            <dt>team members</dt>
+            <dd><ListInput {...teamProps} /></dd>
+          </dl>
 
-          <dt>capacity</dt>
-          <dd>
-            <dl>
-              <dt>maximum</dt><dd>{maximum}</dd>
-              <dt>available</dt><dd>{available}</dd>
-            </dl>
-          </dd>
+          <dl>
+            <dt>absences</dt>
+            <dd><ListInput {...absencesProps} /></dd>
+          </dl>
+        </div>
 
-          <dt>points</dt>
-          <dd>
-            <dl>
-              <dt>recommended</dt>
-              <dd>{recommended}</dd>
+        <div className='Sprint__Calculations'>
+          <dl>
+            <dt>capacity</dt>
+            <dd>
+              <dl>
+                <dt>maximum hours (before absences)</dt><dd>{maximum}</dd>
+                <dt>available hours</dt><dd>{available}</dd>
+              </dl>
+            </dd>
+          </dl>
 
-              <dt>completed</dt>
-              <dd><NumberInput value={completed} /></dd>
-            </dl>
-          </dd>
+          <dl>
+            <dt>commitment points</dt>
+            <dd>
+              <dl>
+                <dt>recommended</dt>
+                <dd>{recommended}</dd>
 
-          <dt>average hours per point </dt>
-          <dd>{averageHoursPerPoint}</dd>
-        </dl>
+                <dt>completed</dt>
+                <dd><NumberInput value={completed} /></dd>
+              </dl>
+            </dd>
+          </dl>
+
+          <dl>
+            <dt>average hours per point </dt>
+            <dd>{averageHoursPerPoint}</dd>
+          </dl>
+        </div>
       </article>
     );
   }
