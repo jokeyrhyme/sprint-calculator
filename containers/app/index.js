@@ -29,8 +29,14 @@ class App extends Component {
     const { dispatch, sprints } = this.props;
     return (
       <main>
+        <header>
+          <h1>Sprint Calculator</h1>
+        </header>
         <Sprints dispatch={dispatch} sprints={sprints} />
         <RawData data={this.props.ui.rawData} onImportClick={this.handleImportClick} />
+        <footer>
+          <a href='https://github.com/jokeyrhyme/sprint-calculator'>GitHub</a>
+        </footer>
       </main>
     );
   }
