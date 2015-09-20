@@ -1,5 +1,3 @@
-/* eslint-disable no-console */ // still experimenting, relax!
-
 'use strict';
 
 // foreign modules

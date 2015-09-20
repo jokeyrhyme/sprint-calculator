@@ -3,6 +3,7 @@
 // foreign modules
 
 import React, { Component, PropTypes } from 'react';
+import { Map } from 'immutable';
 
 // local modules
 
@@ -25,6 +26,8 @@ class Sprint extends Component {
   constructor (props) {
     super(props);
 
+    this.state = { sprint: props.sprint.toJS() };
+
     this.handleIDChange = this.handleIDChange.bind(this);
     this.handleStartDateChange = this.handleStartDateChange.bind(this);
     this.handleWeekHoursChange = this.handleWeekHoursChange.bind(this);
@@ -39,6 +42,14 @@ class Sprint extends Component {
     this.handleMemberRemove = this.handleMemberRemove.bind(this);
 
     this.handleCompletedChange = this.handleCompletedChange.bind(this);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    this.setState({ sprint: nextProps.sprint.toJS() });
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextProps.sprint !== this.props.sprint;
   }
 
   handleIDChange (id) {
@@ -95,14 +106,14 @@ class Sprint extends Component {
   render () {
     let {
       endDate
-    } = this.props.sprint;
+    } = this.state.sprint;
     const {
       startDate,
       absences, team,
       averageHoursPerPoint, personHoursPerWeek, id, weeksPerSprint
-    } = this.props.sprint;
-    const { available, maximum } = this.props.sprint.teamHoursPerSprint;
-    const { completed, recommended } = this.props.sprint.points;
+    } = this.state.sprint;
+    const { available, maximum } = this.state.sprint.teamHoursPerSprint;
+    const { completed, recommended } = this.state.sprint.points;
     endDate = endDate.toISOString().split('T')[0];
 
     const teamProps = {
@@ -198,30 +209,10 @@ class Sprint extends Component {
 Sprint.propTypes = {
   dispatch: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  sprint: PropTypes.shape({
-    id: PropTypes.number,
-    startDate: PropTypes.instanceOf(Date),
-    endDate: PropTypes.instanceOf(Date),
-    weeksPerSprint: PropTypes.number,
-    team: PropTypes.arrayOf(PropTypes.string),
-    personHoursPerWeek: PropTypes.number,
-    teamHoursPerSprint: PropTypes.shape({
-      available: PropTypes.number,
-      maximum: PropTypes.number
-    }),
-    absences: PropTypes.arrayOf(
-      PropTypes.shape({
-        reason: PropTypes.string,
-        hours: PropTypes.number
-      })
-    ),
-    points: PropTypes.shape({
-      completed: PropTypes.number,
-      recommended: PropTypes.number
-    }),
-    averageHoursPerPoint: PropTypes.number
-  })
+  sprint: PropTypes.instanceOf(Map).isRequired
 };
-Sprint.defaultProps = {};
+Sprint.defaultProps = {
+  sprint: new Map()
+};
 
 export default Sprint;

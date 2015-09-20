@@ -4,6 +4,7 @@
 
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
+import { Map } from 'immutable';
 
 // local modules
 
@@ -37,7 +38,7 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  sprints: PropTypes.arrayOf(PropTypes.object),
+  sprints: PropTypes.arrayOf(PropTypes.instanceOf(Map)),
   ui: PropTypes.shape({
     rawData: PropTypes.string
   })
@@ -51,7 +52,10 @@ provide a state suitable for use here
 @returns {Object} exported from Immutable Map
 */
 function mapStateToProps (state) {
-  return state.toJS();
+  return {
+    sprints: state.get('sprints').toArray(),
+    ui: state.get('ui').toJS()
+  };
 }
 
 export default connect(mapStateToProps)(App);

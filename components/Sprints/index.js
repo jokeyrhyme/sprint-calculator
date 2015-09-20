@@ -3,6 +3,7 @@
 // foreign modules
 
 import React, { Component, PropTypes } from 'react';
+import { Map } from 'immutable';
 
 // local modules
 
@@ -43,7 +44,7 @@ class Sprints extends Component {
 
 Sprints.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  sprints: PropTypes.array
+  sprints: PropTypes.arrayOf(PropTypes.instanceOf(Map))
 };
 Sprints.defaultProps = {
   sprints: []
