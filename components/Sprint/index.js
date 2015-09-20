@@ -15,7 +15,8 @@ import TextInput from '../TextInput';
 import {
   setSprintID, setSprintStartDate, setSprintWeekHours, setSprintWeeks,
   addSprintAbsence, removeSprintAbsence, setSprintAbsence,
-  addSprintMember, removeSprintMember, setSprintMember
+  addSprintMember, removeSprintMember, setSprintMember,
+  setSprintCompletedPoints
 } from '../../lib/actions';
 
 // this module
@@ -36,6 +37,8 @@ class Sprint extends Component {
     this.handleMemberAdd = this.handleMemberAdd.bind(this);
     this.handleMemberChange = this.handleMemberChange.bind(this);
     this.handleMemberRemove = this.handleMemberRemove.bind(this);
+
+    this.handleCompletedChange = this.handleCompletedChange.bind(this);
   }
 
   handleIDChange (id) {
@@ -82,6 +85,11 @@ class Sprint extends Component {
   handleMemberRemove (memberIndex) {
     const { dispatch, index } = this.props;
     dispatch(removeSprintMember(index, memberIndex));
+  }
+
+  handleCompletedChange (number) {
+    const { dispatch, index } = this.props;
+    dispatch(setSprintCompletedPoints(index, number));
   }
 
   render () {
@@ -172,7 +180,7 @@ class Sprint extends Component {
                 <dd>{recommended}</dd>
 
                 <dt>completed</dt>
-                <dd><NumberInput value={completed} /></dd>
+                <dd><NumberInput value={completed} onChange={this.handleCompletedChange} /></dd>
               </dl>
             </dd>
           </dl>
